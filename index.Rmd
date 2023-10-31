@@ -302,16 +302,15 @@ The population of insects can change over time due to various factors.
 As a farmer, you can observe the insect population at certain intervals or when taking specific actions (e.g., scouting the field, applying pest control measures). These observations help you update your understanding of the current state of the insect population and adjust your pest management strategies.
 
 ---
+**Questions**
 
- - What is the probability that the insect population in a crop field exceeds a certain threshold during the growing season, leading to potential crop damage?
- 
- - What is the expected time it takes for the pest population to reach a critical threshold, potentially leading to a pest outbreak that could harm crops?
- 
---- 
- 
- - When is the optimal time to apply pest control measures to minimize crop damage and maximize crop yield?
- 
- - What is the probability that pests develop resistance to a pesticide over a given number of application cycles, and how does this affect long-term pest control strategies?
+  - What is the probability that the insect population in a crop field exceeds a certain threshold during the growing season, leading to potential crop damage?
+  
+  - What is the expected time it takes for the pest population to reach a critical threshold, potentially leading to a pest outbreak that could harm crops?
+  
+  - When is the optimal time to apply pest control measures to minimize crop damage and maximize crop yield?
+  
+  - What is the probability that pests develop resistance to a pesticide over a given number of application cycles, and how does this affect long-term pest control strategies?
 
 ---
 
@@ -319,9 +318,6 @@ As a farmer, you can observe the insect population at certain intervals or when 
 
 Air temperature at a certain place at time $t$
 
----
-
-### Continuous state space stochastic processes
 
 - When is the optimal time to plant crops, given temperature probabilities and historical data, to maximize crop yield and minimize frost risk?
 
@@ -474,18 +470,104 @@ rnorm(5, 4, 2)
 rnorm(5, 4, 2)
 ```
 
----
-
-## Realization (or sample path/ trajectory) of stochastic process
-
-
-Consider a process that has a value in each *time period*. Let $X_t$ denote its value at $t$. suppose we want to make a probability model for the
-sequence of successive values 
-
-$$X_1,X_2,X_3 . . .$$
-
-> In-class
-
-## In-class
 
 ---
+
+Let's look at the differences
+
+- Stochastic vs deterministic
+
+- Time series and Stochastic processes
+
+---
+
+## Stochastic process or not?
+
+```{r}
+t <- 1:100
+y <- sin(2*pi*t)
+df <- data.frame(y=y, t=t)
+df
+
+```
+
+---
+
+##  Stochastic process or not?
+
+```{r}
+library(ggplot2)
+ggplot(data=df, aes(x=t, y=y)) + 
+  geom_point() + 
+  geom_line()
+```
+
+---
+##  Stochastic process or not?
+
+```{r}
+library(denguedatahub)
+data(srilanka_weekly_data)
+srilanka_weekly_data |> 
+  dplyr::filter(district == "Colombo") |>
+ggplot(aes(x=start.date, y=cases)) + geom_line()  + scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+```
+
+
+
+
+---
+
+## Applications
+
+- Population dynamics
+
+- Genome evolution
+
+- Statistical pattern of arrivals/ waiting-line analysis or queueing problem of operations research
+
+- Service mechanism describes when service is available, how many customers can be served at a time, and how long service takes
+
+- Applications to risk theory, insurance, actuarial science and system risk engineering
+
+
+---
+
+## Example 1
+
+Suppose that a virus can exist in 4 different strains (species), numbered from 1 to 4. In each new generation it either stays the same, or with probability $\alpha$ mutates to another strain,  chosen at random. The $\alpha$ is $0 < \alpha < 1$.
+
+Explain  how to compute the probability that the strain in the fifth generation is the same as the initial strain?
+
+---
+
+## Example 2
+
+The weather changes at a tourist resort from one day to the next can somewhat simplified be described as a Markov chain with the three states: Sunny, Cloudy and Rainy. Using the weather statistics of the area the following transition probability matrix has been estimated.
+
+$$P = \left[\begin{array}{cccc}
+ & S & C & R\\
+S & 0.5 & 0.3 & 0.2\\
+C & 0.3 & 0.5 & 0.2\\
+R & 0.6 & 0.1 & 0.3
+\end{array}\right]$$
+A tourist intends to visit the resort during 24 - 26 October. What is the probability that there will be three sunny days in a row?
+
+---
+
+## Example 3
+
+Individuals arrive to a COVID-19 vaccination centre according to a nonhomogeneous Poisson process having the rate function
+
+$$\begin{equation*}
+\lambda(t) = \begin{cases}
+2t & \text{ for } 0 \leq t < 1, \\
+2 & \text{ for } 1 \leq t < 2, \\
+4-t & \text{ for } 2 \leq t < 4, \\
+\end{cases}
+\end{equation*}$$
+
+where $t$ is measured in hours from 8.00am.
+
+Calculate the probability that two people arrive from 8.00am to 10.00am?
