@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 331 2.0 Stochastic Processes</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Thiyanga S. Talagala" />
+    <script src="index_files/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# STA 331 2.0 Stochastic Processes
+]
+.subtitle[
+## Introduction to Stochastic Processes
+]
+.author[
+### Thiyanga S. Talagala
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+h1, #TOC&gt;ul&gt;li {
+  color: #3f007d;
+  font-weight: bold;
+}
+h2, #TOC&gt;ul&gt;ul&gt;li {
+  color:  #3f007d;
+  #font-family:  "Times";
+  font-weight: bold;
+}
+h3, #TOC&gt;ul&gt;ul&gt;li {
+  color: #ce1256;
+  #font-family:  "Times";
+  font-weight: bold;
+}
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 30px;
+    padding: 1em 4em 1em 4em;
+}
+&lt;/style&gt;
+
+
+## About
+
+Lecturer-in-charge: Dr Thiyanga S. Talagala
+
+Pre-requisites: 
+
+- Probability and Distribution Theory I
+
+- Probability and Distribution Theory II,
+
+- Programming and Data Analysis with R
+
+---
+
+## About (cont.)
+
+Course objective:
+
+The objective of this course is to introduce models for basic stochastic processes,
+in particular Markov processes.
+
+Workload: 100 hours
+
+---
+
+## About (cont.)
+
+
+**Method of Assessment:**
+
+  - Assignment/ Mid-course-unit examination: 30%
+
+  - End-course-unit examination: 70%
+  
+**Mode of contact:**
+
+Discussion forum LMS, Online help desk, Emails
+
+---
+
+## About (cont.)
+
+Recommended Reading:
+
+Introduction to stochastic processes, Thiyanga S. Talagala (available online: https://thiyangt.github.io/tst.stochasticprocesses/)
+
+Introduction to probability models. Sheldon M. Ross.
+
+---
+
+## Course content
+
+1. Introduction to Stochastic Processes
+
+2. Discrete Parameter Markov Chains
+
+3. Continuous Parameter Markov Chains
+
+---
+
+## What does “stochastic” mean? 
+
+The meaning of “stochastic” is random. 
+
+
+
+---
+
+## Random experiment
+
+A **random experiment** is a physical situation whose outcome cannot be predicted with certainty until it is observed. A random experiment can be repeated as many times as we want under the same conditions (leading to different outcomes). Each one of them a trial. Thus, a trial is a particular performance of a random experiment.
+
+---
+
+## Sample space
+
+A set of all possible outcomes of a random experiment. Here, I use `\(\Omega\)` to denote a sample space. 
+
+*Example 1:*
+
+*Random Experiment: Tossing of a coin*. 
+
+*Sample Space:* `\(\Omega = \{H, T\}\)`
+
+---
+
+*Example 2:*
+
+*Random Experiment: Toss a coin three times*. 
+
+*Sample Space:* 
+
+`\(\Omega = \{(H, H, H), (H, H, T), (H, T, H), (T, H, H), (H, T, T), (T, H, T),\)`
+
+`\((T, T, H), (T, T, T)\}\)`
+
+
+---
+
+## Random variable
+
+Let `\((\Omega, \mathscr{F}, \mathbb{P})\)` be a probability space. A measurable mapping `\(X: \Omega \rightarrow \mathbb{R}\)` is called a random variable.
+
+There are two types of random variables: 
+
+i) Discrete random variable 
+
+ii) Continuous random variable
+
+
+--
+
+We use Roman capital letters to denote random variables ( `\(X\)`, `\(Y\)`, `\(Z\)`, `\(U\)`, `\(T\)`, etc.). However, as soon as a variable `\(X\)` is observed, the observed values are represented by the corresponding simple Roman letter. 
+
+---
+
+## Example
+
+Consider the experiment of tossing a coin. Express the following events using a suitably defined random variable.
+
+H = The event of getting a head
+
+T = The event of getting a tail
+
+
+---
+
+## Your turn:
+
+Let's consider a simple experiment with three possible outcomes: reporting the weather condition of a particular day as cloudy, sunny, or rainy
+
+**Task:** Express all possible events using a suitably defined random variable.
+
+---
+
+## Your turn
+
+suppose we monitor the weather condition every hour in a day sunny, rainy, and cloudy.
+
+**Task:** Express all possible events using  suitably defined random variable(s).
+
+
+---
+
+## Definition: Stochastic process
+
+A stochastic process is a collection of random variables `\(\{X_t; t\in T\}\)` or `\(\{X(t); t\in T\}\)`
+where `\(T\)` is an index set. That is for each `\(t \in T\)` , `\(X_t\)` (or `\(X(t)\)`) is a random variable.
+
+---
+### Random variable: Probability Theory vs Stochastic Theory
+
+**Probability theory**
+
+Let `\((\Omega, \mathscr{F}, \mathbb{P})\)` be a probability space. Random variable is a function `\(X: \Omega \rightarrow \mathbb{R}\)`.
+
+--
+
+**Stochastic theory**
+
+Suppose that `\((\Omega, \mathscr{F}, \mathbb{P})\)` is a probability space, the function `\(X: T \times \Omega \rightarrow \mathbb{R}\)` .
+
+--
+
+We will always assume that the cardinality of `\(T\)` is infinite, either countable or
+uncountable.
+
+---
+
+## Parameter space and State space
+
+**Parameter space**
+
+`\(T\)` is called the parameter space.
+
+**State space**
+
+The set of possible values of an individual random variable `\(X_t\)` or `\(X(t)\)` can take is called the state space of the process.
+
+---
+
+## Classification of parameter space
+
+**Discrete-parameter space**
+
+When `\(T\)` is a countable set, the process is said to be a discrete-parameter process. A discrete parameter
+stochastic process is denoted by `\(\{X_t; t \in T\}\)`.
+
+**Continuous-parameter space**
+
+When `\(T\)` is an interval of the real line, the process is said to be a continuous-parameter process. A continuous-parameter stochastic process is denoted by `\(\{X(t); t \in T \}\)`.
+
+
+---
+
+## Classification of parameter space
+
+**Discrete-parameter space**
+
+- Observe the values of the Dow-Jones Index at the end of the `\(n^{th}\)` week.
+
+**Continuous-parameter space**
+
+- The number of students waiting for a bus
+at any time of day.
+
+---
+
+## Classification of state space
+
+The state space is **discrete** if it contains a finite or countably infinite number of points.
+Otherwise it is **continuous**.
+
+---
+
+## Discrete state space stochastic  processes
+
+**Example:** Modeling Insect Populations in a Crop Field
+
+
+
+Let's say you're a farmer interested in understanding and managing the population of a particular pest insect in your crop field. The state space for this stochastic process is the number of insects in the field at any given time, and it's a discrete set of values (e.g., 0, 1, 2, 3, and so on).
+
+The goal is to optimize pest control efforts to minimize crop damage while minimizing the use of pesticides.
+
+---
+
+## Discrete state space stochastic  processes (cont.)
+
+Initial State: At the beginning of the growing season, the field might be empty, so the initial state is 0 insects.
+
+--
+
+The population of insects can change over time due to various factors.
+
+--
+
+As a farmer, you can observe the insect population at certain intervals or when taking specific actions (e.g., scouting the field, applying pest control measures). These observations help you update your understanding of the current state of the insect population and adjust your pest management strategies.
+
+---
+
+ - What is the probability that the insect population in a crop field exceeds a certain threshold during the growing season, leading to potential crop damage?
+ 
+ - What is the expected time it takes for the pest population to reach a critical threshold, potentially leading to a pest outbreak that could harm crops?
+ 
+--- 
+ 
+ - When is the optimal time to apply pest control measures to minimize crop damage and maximize crop yield?
+ 
+ - What is the probability that pests develop resistance to a pesticide over a given number of application cycles, and how does this affect long-term pest control strategies?
+
+---
+
+### Continuous state space stochastic processes
+
+Air temperature at a certain place at time `\(t\)`
+
+---
+
+### Continuous state space stochastic processes
+
+- When is the optimal time to plant crops, given temperature probabilities and historical data, to maximize crop yield and minimize frost risk?
+
+- What is the probability of a heatwave, defined as a period of unusually high temperatures, lasting for a certain number of consecutive days?
+
+---
+
+Transition Probabilities: The transition probabilities represent the likelihood of temperature changes from one day to the next. 
+
+Memoryless Property: The Markov property is maintained, which means the probability of temperature on a future day depends only on the temperature on the current day and not on the past temperature history.
+
+---
+
+## Classifications of  processes
+
+1. discrete-parameter, discrete state space stochastic processes.
+
+2. continuous-parameter, discrete state space stochastic processes.
+
+3. discrete-parameter, continuous state space stochastic processes.
+
+4. continuous-parameter, continuous state space stochastic processes
+
+---
+
+## Classifications of stochastic processes (cont.)
+
+Graphs
+
+---
+
+## Question 1
+
+Availability of a book at the time of inventory is classified as: available, misshelved, issued, missed. Suppose the inventories are conducted once every month. 
+
+i) What is the parameter space? 
+
+ii) What is the state space? 
+
+iii) What type of stochastic process is it?
+
+---
+
+## Question 2
+
+Let `\(N(t)\)` be the number of calls arriving at time `\(t\)`.
+
+i) What is the parameter space? 
+
+ii) What is the state space? 
+
+iii) What type of stochastic process is it?
+
+---
+
+## Question 3
+
+The number of customers in a queue in front of an ATM for at the end of each hour of a day. What type of stochastic process is this?
+
+1. discrete-parameter, discrete state space stochastic processes.
+
+2. continuous-parameter discrete state space stochastic processes.
+
+3. discrete-parameter, continuous state space stochastic processes.
+
+4. continuous-parameter continuous state space stochastic processes
+
+---
+
+## Question 4
+
+Number of vehicles in parking of a shopping mall at any time during the day.
+
+i) What is the parameter space? 
+
+ii) What is the state space? 
+
+iii) What type of stochastic process is it?
+
+---
+
+## Question 5
+
+Classify the following stochastic process based on the state space and parameter space. A life insurance company classifies the state of health of a policy holder as Healthy, Sick, Dead. If the health status of policyholders are observed daily,
+
+
+1. discrete-parameter, discrete state space stochastic processes.
+
+2. continuous-parameter discrete state space stochastic processes.
+
+3. discrete-parameter, continuous state space stochastic processes.
+
+4. continuous-parameter continuous state space stochastic processes
+
+---
+
+## Question 6
+
+Classify the following stochastic process based on the state space and parameter space. The number of particles
+emitted by a certain radioactive material undergoing radioactive decay during a certain period.
+
+
+1. discrete-parameter, discrete state space stochastic processes.
+
+2. continuous-parameter discrete state space stochastic processes.
+
+3. discrete-parameter, continuous state space stochastic processes.
+
+4. continuous-parameter continuous state space stochastic processes
+
+---
+
+## Question 7
+
+Classify the following stochastic process based on the state space and parameter space. Daily maximum temperature observed in Colombo.
+
+
+1. discrete-parameter, discrete state space stochastic processes.
+
+2. continuous-parameter discrete state space stochastic processes.
+
+3. discrete-parameter, continuous state space stochastic processes.
+
+4. continuous-parameter continuous state space stochastic processes
+
+---
+
+## In this course
+
+1. **discrete-parameter, discrete state space stochastic processes.**
+
+2. **continuous-parameter discrete state space stochastic processes.**
+
+3. discrete-parameter, continuous state space stochastic processes.
+
+4. continuous-parameter continuous state space stochastic processes.
+
+---
+
+## Realization
+
+`\(X \sim Normal(4, 4)\)`
+
+
+```r
+rnorm(5, 4, 2)
+```
+
+```
+[1] 5.0308753 3.7857457 3.0026019 1.4267400 0.6265612
+```
+
+
+
+```r
+rnorm(5, 4, 2)
+```
+
+```
+[1] 3.083205 3.045109 2.273017 7.663010 2.627525
+```
+
+---
+
+## Realization (or sample path/ trajectory) of stochastic process
+
+
+Consider a process that has a value in each *time period*. Let `\(X_t\)` denote its value at `\(t\)`. suppose we want to make a probability model for the
+sequence of successive values 
+
+`$$X_1,X_2,X_3 . . .$$`
+
+&gt; In-class
+
+## In-class
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
