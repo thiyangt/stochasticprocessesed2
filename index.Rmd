@@ -302,22 +302,23 @@ The population of insects can change over time due to various factors.
 As a farmer, you can observe the insect population at certain intervals or when taking specific actions (e.g., scouting the field, applying pest control measures). These observations help you update your understanding of the current state of the insect population and adjust your pest management strategies.
 
 ---
-**Questions**
+## Questions
 
   - What is the probability that the insect population in a crop field exceeds a certain threshold during the growing season, leading to potential crop damage?
   
   - What is the expected time it takes for the pest population to reach a critical threshold, potentially leading to a pest outbreak that could harm crops?
-  
+
+---
+## Questions (cont.)
+
   - When is the optimal time to apply pest control measures to minimize crop damage and maximize crop yield?
   
   - What is the probability that pests develop resistance to a pesticide over a given number of application cycles, and how does this affect long-term pest control strategies?
 
 ---
-
 ### Continuous state space stochastic processes
 
 Air temperature at a certain place at time $t$
-
 
 - When is the optimal time to plant crops, given temperature probabilities and historical data, to maximize crop yield and minimize frost risk?
 
