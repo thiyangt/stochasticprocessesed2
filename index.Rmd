@@ -132,7 +132,9 @@ The meaning of “stochastic” is random.
 
 ## Random experiment
 
-A **random experiment** is a physical situation whose outcome cannot be predicted with certainty until it is observed. A random experiment can be repeated as many times as we want under the same conditions (leading to different outcomes). Each one of them a trial. Thus, a trial is a particular performance of a random experiment.
+- A **random experiment** is a physical situation whose outcome cannot be predicted with certainty until it is observed. 
+
+- A random experiment can be repeated as many times as we want under the same conditions (leading to different outcomes). Each one of them a trial. Thus, a trial is a particular performance of a random experiment.
 
 ---
 
